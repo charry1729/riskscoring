@@ -169,10 +169,10 @@ def combine_samples(positive=[], negative=[]):
     return result_df
 
 
-# entity = "upbit"
-# start_date = datetime(2019, 12, 1, 0, 0, 0)
-# end_date = datetime(2019, 12, 31, 23, 59, 59)
-# print(conventional_scrape_by_entity(entity, start_date, end_date))
+entity = "upbit"
+start_date = datetime(2019, 12, 1, 0, 0, 0)
+end_date = datetime(2019, 12, 31, 23, 59, 59)
+print(conventional_scrape_by_entity(entity, start_date, end_date))
 
 #### UNCOMMENT TO RETRIEVE POSITIVE TEST CASES ####
 # df = retrieve_cases("data/hacks_list.csv", time_frame=7)

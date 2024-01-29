@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def insidebitcoins_scrape(entity, start_date, end_date):
-    website_url = "https://insidebitcoins.com"
+    website_url = "https://insidebitcoins.com/news"
     page_num = 1
     current_date = end_date
 
@@ -15,16 +15,28 @@ def insidebitcoins_scrape(entity, start_date, end_date):
     # create output dataframe
     column_names = ["date_time", "title", "excerpt", "article_url", "image_url", "source_id"]
     df = pd.DataFrame(columns = column_names)
-
+    print(df)
     # keep retrieving data from next page as long as it is within date range
     while current_date >= start_date: 
         # new page of queries
         search = website_url + f"/page/{page_num}?s={entity_search}&submit=Search"
         page = requests.get(search)
         soup = BeautifulSoup(page.content, features="html.parser")
-
+        # print(soup)
         # retrieve article items
-        results = soup.find_all("article") 
+        results = soup.find_all('a', class_='article-header-title') 
+        # print(results)
+
+        # Extract and format links and titles
+        formatted_output = ""
+        for i, a_element in enumerate(results, 1):
+            href = a_element.get('href')
+            title = a_element.text.strip()
+            
+            formatted_output += f"{i}\n<a href=\"{href}\" rel=\"nofollow\" target=\"_blank\">{title}</a>\n"
+
+        # Print the formatted output
+        print(formatted_output)
 
         # no articles retrieved from search
         if len(results) == 0:
@@ -34,7 +46,10 @@ def insidebitcoins_scrape(entity, start_date, end_date):
         for i in range(len(results)): 
             try: 
                 # retrieve date 
-                date_string = results[i].find(class_="c-ArticleInfo--date").find("span").text
+                date_string = results[i].find(class_="w-post-elm post_date entry-date updated")["datetime"]
+                date_time = datetime.strptime(date_string, "%Y-%m-%dT%H:%M:%S")
+
+                # date_string = results[i].find(class_="c-ArticleInfo--date").find("span").text
                 # print(date_string)
             except:
                 pass
@@ -72,8 +87,8 @@ def insidebitcoins_scrape(entity, start_date, end_date):
         
     return df
 
-# # testing function
-# entity = "ethereum"
-# start_date = datetime(2020, 7, 17)
-# end_date = datetime(2020, 8, 17)
-# test = insidebitcoins_scrape(entity, start_date, end_date)
+# testing function
+entity = "ethereum"
+start_date = datetime(2020, 7, 17)
+end_date = datetime(2023, 8, 17)
+test = insidebitcoins_scrape(entity, start_date, end_date)

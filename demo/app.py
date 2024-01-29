@@ -26,55 +26,55 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     "width": "28rem",
     "padding": "2rem 1rem",
-    "background-color": "#f1f4f9",
-    "font-size": "15px"
+    "backgroundColor": "#f1f4f9",
+    "fontSize": "15px"
 }
 
 # styles for the main content position it to the right of the sidebar with padding
 CONTENT_STYLE = {
-    "margin-left": "30rem",
-    "margin-right": "2rem",
+    "marginLeft": "30rem",
+    "marginRight": "2rem",
     "padding": "2rem 1rem",
-    "font-size": "12px"
+    "fontSize": "12px"
 }
 
 # styles for the score displays
 SCORE_STYLE = {
-    "font-size": "16px", 
-    "font-weight": "600", 
-    "background-color": "#f1f4f9", 
+    "fontSize": "16px", 
+    "fontWeight": "600", 
+    "backgroundColor": "#f1f4f9", 
     "border-color": "white",
     "display": "inline-block",
     "width": "30px",
     # "height": "65px", 
     "border-radius": "100px", 
     "padding": "10px",
-    "text-align": "center",
+    "textAlign": "center",
     "vertical-align": "center",
 }
 
 # styles for the side tabs
 TAB_STYLE = {
-    "font-size": "20px", 
-    "font-weight": "600", 
-    "text-align": "left"
+    "fontSize": "20px", 
+    "fontWeight": "600", 
+    "textAlign": "left"
 }
 
-unclicked_button_style = {'background-color': '#f1f4f9',
+unclicked_button_style = {'backgroundColor': '#f1f4f9',
                             'border': '#f1f4f9',
                             'color': 'black',
                             'height': '70px',
                             'width': '100%',
-                            'margin-top': '0px',
-                            'margin-left': '0px'}
+                            'marginTop': '0px',
+                            'marginLeft': '0px'}
 
-clicked_button_style = {'background-color': 'white',
+clicked_button_style = {'backgroundColor': 'white',
                         'border': '#f1f4f9',
                         'color': 'darkblue',
                         'height': '70px',
                         'width': '100%',
-                        'margin-top': '0px',
-                        'margin-left': '0px'}
+                        'marginTop': '0px',
+                        'marginLeft': '0px'}
 
 
 #### SIDEBAR ##################################################################
@@ -84,20 +84,20 @@ encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 sidebar = html.Div(
     [
-        html.Img(src='https://s2-cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/688/200/original/Lynx_LinkedIn.png?1573727274', style={'width': '300px', 'height': '50px', 'object-fit': 'cover'}),
-        html.H5("CyLynx Demo", className="display-4", style={'font-weight': '500'}),
-        html.H6("Demonstration Dashboard for BT4103", className="lead"),
+        # html.Img(src='https://s2-cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/688/200/original/Lynx_LinkedIn.png?1573727274', style={'width': '300px', 'height': '50px', 'object-fit': 'cover'}),
+        html.H5("Risk Demo", className="display-4", style={'fontWeight': '500'}),
+        html.H6("Demo Dashboard", className="lead"),
         html.Hr(),
         html.Br(),
-        # dcc.Link(html.H6('Overall Demonstration', style=TAB_STYLE), href='overall'),
+        # dcc.Link(html.H6('Overall Demo', style=TAB_STYLE), href='overall'),
         dcc.Link(
-            html.Button(html.H6("Overall Demonstration", style=TAB_STYLE), id='overall-button',
+            html.Button(html.H6("Overall Demo", style=TAB_STYLE), id='overall-button',
                 n_clicks=0,
                 style=unclicked_button_style), href='overall'
         ),
         html.Br(),
         dcc.Link(
-            html.Button(html.H6("Entity Demonstration", style=TAB_STYLE), id='entity-button',
+            html.Button(html.H6("Entity Demo", style=TAB_STYLE), id='entity-button',
             n_clicks=0,
             style=unclicked_button_style), href='entity'
         ),
@@ -113,7 +113,7 @@ entity_list.sort() # sort in alphabetical order
 
 # entity input
 entity_input = html.Div([
-    dbc.Label("Entity Name", className="p", style={"font-weight": "600", "font-size": "14px"}),
+    dbc.Label("Entity Name", className="p", style={"fontWeight": "600", "fontSize": "14px"}),
     html.Br(),
     dcc.Dropdown(
         id='entity-input',
@@ -121,11 +121,11 @@ entity_input = html.Div([
         options=[
             {'label': entity, 'value': entity} for entity in entity_list
         ],
-        style={"font-size": "14px"}, 
+        style={"fontSize": "14px"}, 
         className="mb-3",
     ),
     html.Div(id='dd-output-container')
-], style={'width': '30%', 'display': 'inline-block', 'margin-right': 30})
+], style={'width': '30%', 'display': 'inline-block', 'marginRight': 30})
 
 # read sample_risk_data
 sample_risk_data = pd.read_csv('https://raw.githubusercontent.com/ValaryLim/lynx-blockchain-risk-scoring/yanjean/dashboard/demo/data/entity_risk_score_data.csv', sep=',')
@@ -135,21 +135,21 @@ max_date = datetime.strptime(max_date, '%Y-%m-%d') + timedelta(days=1)
 
 # date input
 date_input = html.Div([
-    dbc.Label("Date Range", className="p", style={"font-weight": "600", "font-size": "14px"}),
+    dbc.Label("Date Range", className="p", style={"fontWeight": "600", "fontSize": "14px"}),
     html.Br(),
     dcc.DatePickerRange(
         id="date-input",
-        style={"font-size": "14px"},
+        style={"fontSize": "14px"},
         min_date_allowed = min(sample_risk_data['date']),
         max_date_allowed =  max_date,
         initial_visible_month = datetime.today(),
         className="mb-3"
     )
-], style={'width': '40%', 'display': 'inline-block', 'margin-right': 20})
+], style={'width': '40%', 'display': 'inline-block', 'marginRight': 20})
 
 # submit button
 submit_button = html.Div([
-    dbc.Label("Button", className="p", style={"color": "white", "font-weight": "600"}), # for alignment
+    dbc.Label("Button", className="p", style={"color": "white", "fontWeight": "600"}), # for alignment
     html.Br(),
     dbc.Button("Submit", color="dark", block=False, id="submit", className="mb-3")
 ], style={'width': '20', 'display': 'inline-block'})
@@ -193,7 +193,7 @@ def generate_table(name, dataframe):
         html.Br(),
         html.H5(name),
         dbc.Label(f"Total Articles Retrieved: {len(dataframe)}", 
-                    style={"font-weight": "600", "font-size": "14px"}),
+                    style={"fontWeight": "600", "fontSize": "14px"}),
         html.Br(),
         html.Div(
             dash_table.DataTable(
@@ -290,15 +290,27 @@ def generate_graph(entity, start_date, end_date):
     ]
 )
 
+# def render_entity_page(n_clicks, entity, start_date, end_date):
+#     if n_clicks == None:
+#         return (None, None, None, None, None)
+
+#     # convert start and end date to datetime
+#     start_date_datetime = datetime.strptime(start_date, "%Y-%m-%d")
+#     end_date_datetime = datetime.strptime(end_date, "%Y-%m-%d")
+#     end_date_datetime = end_date_datetime.replace(hour=23, minute=59)
 def render_entity_page(n_clicks, entity, start_date, end_date):
-    if n_clicks == None:
+    if n_clicks is None or start_date is None or end_date is None:
         return (None, None, None, None, None)
 
     # convert start and end date to datetime
-    start_date_datetime = datetime.strptime(start_date, "%Y-%m-%d")
-    end_date_datetime = datetime.strptime(end_date, "%Y-%m-%d")
-    end_date_datetime = end_date_datetime.replace(hour=23, minute=59)
-
+    try:
+        start_date_datetime = datetime.strptime(start_date, "%Y-%m-%d")
+        end_date_datetime = datetime.strptime(end_date, "%Y-%m-%d")
+        end_date_datetime = end_date_datetime.replace(hour=23, minute=59)
+    except ValueError as e:
+        # Handle the case where the date format is incorrect
+        print(f"Error converting dates: {e}")
+        return (None, None, None, None, None)
     ##### SCORE DISPLAY #####
     # read csv of risk data
     sample_risk_data = pd.read_csv('https://raw.githubusercontent.com/ValaryLim/lynx-blockchain-risk-scoring/yanjean/dashboard/demo/data/entity_risk_score_data.csv', sep=',')
@@ -319,9 +331,9 @@ def render_entity_page(n_clicks, entity, start_date, end_date):
             return 'black'
 
     score_display = html.Div([
-        dbc.Label("Open Source Information", className="p", style={"font-size": "30px", "font-weight": "600", 'display': 'inline-block', 'margin-right': 50}),
+        dbc.Label("Open Source Information", className="p", style={"fontSize": "30px", "fontWeight": "600", 'display': 'inline-block', 'marginRight': 50}),
         dbc.Label((f"Overall Score: {str(max_score.loc['score', 'max_score'])}"), 
-                    className="p", style={"color": get_color(max_score.loc['score', 'max_score']), "font-size": "20px", "font-weight": "600", 'width': '300px', 'display': 'inline-block', "background-color": "#f1f4f9", "height": "40px", "padding": "5px", "text-align": "center", "vertical-align": "center"}),
+                    className="p", style={"color": get_color(max_score.loc['score', 'max_score']), "fontSize": "20px", "fontWeight": "600", 'width': '300px', 'display': 'inline-block', "backgroundColor": "#f1f4f9", "height": "40px", "padding": "5px", "textAlign": "center", "vertical-align": "center"}),
         html.Br(),
         html.Br(),
         dbc.Row(
@@ -348,10 +360,10 @@ def render_entity_page(n_clicks, entity, start_date, end_date):
         html.Br(),
 
         dbc.Row([
-            html.Div("Legend:  ", style={"font-size": '16px', "font-weight": 400, 'display': 'inline-block', "padding": "10px"}), 
-            html.Div("High Risk  ", style={"font-size": '16px', "font-weight": 400, 'color':'red', 'display': 'inline-block', "padding": "10px"}),
-            html.Div("Medium Risk  ", style={"font-size": '16px', "font-weight": 400, 'color': '#FF8C00', 'display': 'inline-block', "padding": "10px"}),
-            html.Div("Low/ No Risk ", style={"font-size": '16px', "font-weight": 400, 'display': 'inline-block', "padding": "10px"})]),
+            html.Div("Legend:  ", style={"fontSize": '16px', "fontWeight": 400, 'display': 'inline-block', "padding": "10px"}), 
+            html.Div("High Risk  ", style={"fontSize": '16px', "fontWeight": 400, 'color':'red', 'display': 'inline-block', "padding": "10px"}),
+            html.Div("Medium Risk  ", style={"fontSize": '16px', "fontWeight": 400, 'color': '#FF8C00', 'display': 'inline-block', "padding": "10px"}),
+            html.Div("Low/ No Risk ", style={"fontSize": '16px', "fontWeight": 400, 'display': 'inline-block', "padding": "10px"})]),
 
         html.Br(), 
     ]

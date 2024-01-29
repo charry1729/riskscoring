@@ -9,7 +9,7 @@ from datetime import datetime
 import pandas as pd
 
 def blockonomi_scrape(entity, start_date, end_date):
-    website_url = "https://blockonomi.com"
+    website_url = "https://blockonomi.com/all"
     page_num = 1
     current_date = end_date
 

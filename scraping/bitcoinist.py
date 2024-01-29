@@ -13,19 +13,23 @@ def bitcoinist_scrape(entity, start_date, end_date):
     #Store data
     data = {'source_id':[], 'date_time':[], 'title':[], 'excerpt':[], 'article_url':[], 'image_url':[], 'author':[], 'author_url':[]}
     
-    #Request and get url
+    # Request and get url
     def retrieve_data(entity, page_num):
-        #Link to retrieve data from
+        # Link to retrieve data from
         r = requests.post("https://bitcoinist.com/wp-admin/admin-ajax.php", data=dict(
-        action = 'svecc_infinite_scroll_archive',
-        query = entity,  #the attribute has name query[s]
-        page=page_num
+            action='svecc_infinite_scroll_archive',
+            query=entity,  # the attribute has name query[s]
+            page=page_num
         ), headers={'User-Agent': 'Mozilla/5.0'})
+
+        # Print the content for debugging purposes
+        print("Response Content:", r.content)
 
         page = r.json()["data"]
         soup = BeautifulSoup(page, 'html.parser')
         results = soup.find_all("div", {"class": 'news three columns wo-gutter grid-medium'})
         return results
+
 
     page_num = 1
     page_data = retrieve_data(entity, page_num)
@@ -98,11 +102,11 @@ def bitcoinist_scrape(entity, start_date, end_date):
 
 
 # ###############Testing################
-# entity = 'binance'
-# start_date = datetime(2020, 10, 26)
-# end_date = datetime(2020, 10, 28)
-# df = bitcoinist_scrape(entity, start_date, end_date)
-# df.to_csv("temp.csv")
+entity = 'binance'
+start_date = datetime(2020, 10, 26)
+end_date = datetime(2020, 10, 28)
+df = bitcoinist_scrape(entity, start_date, end_date)
+df.to_csv("temp.csv")
 # ######################################
 
-    
+  

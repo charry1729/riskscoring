@@ -108,11 +108,11 @@ def crypto_scrape(entity_list, start_date, end_date):
 
 
 # #### TESTING CRYPTO SCRAPE BY ENTITY FUNCTION ###
-# entity = 'binance'
-# start_date = datetime(2020, 9, 1)
-# end_date = datetime(2020, 10, 25)
-# test_df = crypto_scrape_by_entity(entity=entity, start_date=start_date, end_date=end_date)
-# print(test_df)
+entity = 'binance'
+start_date = datetime(2020, 9, 1)
+end_date = datetime(2020, 10, 25)
+test_df = crypto_scrape_by_entity(entity=entity, start_date=start_date, end_date=end_date)
+print(test_df)
 # #################################################
 
 #### TESTING CRYPTO SCRAPE FUNCTION ###

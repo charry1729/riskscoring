@@ -72,10 +72,10 @@ def bitcoinmagazine_scrape(entity, start_date, end_date):
     return df
 
 ################ Test ##################
-## entity = 'binance'
-## start_date = datetime(2020,1,1)
-## end_date = datetime(2020,9,1)
-## df = bitcoinmagazine_scrape(entity, start_date, end_date)
-## print(df)
+entity = 'binance'
+start_date = datetime(2020,1,1)
+end_date = datetime(2023,9,1)
+df = bitcoinmagazine_scrape(entity, start_date, end_date)
+print(df)
 #########################################
-## df.to_csv(r'file.csv')
+# df.to_csv(r'file.csv')

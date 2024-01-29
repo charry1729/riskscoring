@@ -14,12 +14,14 @@ def bitcoin_scrape(entity, start_date, end_date):
 
     # continue_search = False when date_time < start_date
     while continue_search:
-        # retrieve HTML content
-        html = requests.get("https://news.bitcoin.com/page/{}/?s={}".format(page_number, entity))
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        # url = f"https://news.bitcoin.com/page/{page_number}/?s={entity}"
+        url = f"https://news.bitcoin.com/page/{page_number}"
+        html = requests.get(url.format(page_number, entity),headers=headers)
         html_content = html.content
-
         # locate relevant sections
         soup = BeautifulSoup(html_content, 'html.parser')
+        print(soup)
         news = soup.find_all('div', class_='td_module_16 td_module_wrap td-animation-stack')
         news_details = soup.find_all('div', class_='td-module-meta-info')
         news_excerpt = soup.find_all('div', class_='td-excerpt')
@@ -61,7 +63,7 @@ def bitcoin_scrape(entity, start_date, end_date):
     return output
 
 # testing function
-# start_date = datetime(2020, 8, 20)
-# end_date = datetime(2020, 8, 30)
-# test = bitcoin_scrape("bitcoin", start_date, end_date)
-# print(test)
+start_date = datetime(2020, 8, 20)
+end_date = datetime(2023, 8, 30)
+test = bitcoin_scrape("bitcoin", start_date, end_date)
+print(test)

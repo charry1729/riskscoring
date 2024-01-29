@@ -1,3 +1,5 @@
+#--user --upgrade git+https://github.com/twintproject/twint.git@origin/master#egg=twint
+
 # Blockchain Risk Scoring
 #### *In collaboration with Lynx Analytics 
 
@@ -22,6 +24,8 @@ The end-user mainly makes use of the automation branch of the GitHub repository.
 ```bash
 pip install -r requirements.txt
 ```
+numpy==1.19.2
+numpy==1.18.5
 
 
 ## Usage
@@ -41,7 +45,7 @@ get_data(entity, start, end)
 
 The **auto_pipe.py** file also provides a **train** function for the model to be re-trained when performance drops (or on a monthly basis depending on whichever is more suitable).  The **train** method automatically retrieves data from the database for re-training. Parameters that the **train** functions accepts are specified under the function itself. <br/>
 
-
+/Users/charry/nft/lynx-blockchain-risk-scoring/scraping/bitcoinmagazine.py
 
 ## Database
 
